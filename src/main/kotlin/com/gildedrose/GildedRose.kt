@@ -19,51 +19,15 @@ class GildedRose(var items: Array<Item>) {
 
     private fun doAgedBrie(item: Item) {
         with(item) {
-            if (name != AGED_BRIE && name != BACKSTAGE) {
-                if (quality > 0) {
-                    if (name != SULFURAS) {
-                        quality = quality - 1
-                    }
-                }
-            } else {
-                if (quality < 50) {
-                    quality = quality + 1
-
-                    if (name == BACKSTAGE) {
-                        if (sellIn < 11) {
-                            if (quality < 50) {
-                                quality = quality + 1
-                            }
-                        }
-
-                        if (sellIn < 6) {
-                            if (quality < 50) {
-                                quality = quality + 1
-                            }
-                        }
-                    }
-                }
+            if (quality < 50) {
+                quality = quality + 1
             }
 
-            if (name != SULFURAS) {
-                sellIn = sellIn - 1
-            }
+            sellIn = sellIn - 1
 
             if (sellIn < 0) {
-                if (name != AGED_BRIE) {
-                    if (name != BACKSTAGE) {
-                        if (quality > 0) {
-                            if (name != SULFURAS) {
-                                quality = quality - 1
-                            }
-                        }
-                    } else {
-                        quality = quality - quality
-                    }
-                } else {
-                    if (quality < 50) {
-                        quality = quality + 1
-                    }
+                if (quality < 50) {
+                    quality = quality + 1
                 }
             }
         }
@@ -71,52 +35,26 @@ class GildedRose(var items: Array<Item>) {
 
     private fun doBackstage(item: Item) {
         with(item) {
-            if (name != AGED_BRIE && name != BACKSTAGE) {
-                if (quality > 0) {
-                    if (name != SULFURAS) {
-                        quality = quality - 1
-                    }
-                }
-            } else {
-                if (quality < 50) {
-                    quality = quality + 1
+            if (quality < 50) {
+                quality = quality + 1
 
-                    if (name == BACKSTAGE) {
-                        if (sellIn < 11) {
-                            if (quality < 50) {
-                                quality = quality + 1
-                            }
-                        }
-
-                        if (sellIn < 6) {
-                            if (quality < 50) {
-                                quality = quality + 1
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (name != SULFURAS) {
-                sellIn = sellIn - 1
-            }
-
-            if (sellIn < 0) {
-                if (name != AGED_BRIE) {
-                    if (name != BACKSTAGE) {
-                        if (quality > 0) {
-                            if (name != SULFURAS) {
-                                quality = quality - 1
-                            }
-                        }
-                    } else {
-                        quality = quality - quality
-                    }
-                } else {
+                if (sellIn < 11) {
                     if (quality < 50) {
                         quality = quality + 1
                     }
                 }
+
+                if (sellIn < 6) {
+                    if (quality < 50) {
+                        quality = quality + 1
+                    }
+                }
+            }
+
+            sellIn = sellIn - 1
+
+            if (sellIn < 0) {
+                quality = quality - quality
             }
         }
     }
@@ -127,51 +65,15 @@ class GildedRose(var items: Array<Item>) {
 
     private fun doOther(item: Item) {
         with(item) {
-            if (name != AGED_BRIE && name != BACKSTAGE) {
-                if (quality > 0) {
-                    if (name != SULFURAS) {
-                        quality = quality - 1
-                    }
-                }
-            } else {
-                if (quality < 50) {
-                    quality = quality + 1
-
-                    if (name == BACKSTAGE) {
-                        if (sellIn < 11) {
-                            if (quality < 50) {
-                                quality = quality + 1
-                            }
-                        }
-
-                        if (sellIn < 6) {
-                            if (quality < 50) {
-                                quality = quality + 1
-                            }
-                        }
-                    }
-                }
+            if (quality > 0) {
+                quality = quality - 1
             }
 
-            if (name != SULFURAS) {
-                sellIn = sellIn - 1
-            }
+            sellIn = sellIn - 1
 
             if (sellIn < 0) {
-                if (name != AGED_BRIE) {
-                    if (name != BACKSTAGE) {
-                        if (quality > 0) {
-                            if (name != SULFURAS) {
-                                quality = quality - 1
-                            }
-                        }
-                    } else {
-                        quality = quality - quality
-                    }
-                } else {
-                    if (quality < 50) {
-                        quality = quality + 1
-                    }
+                if (quality > 0) {
+                    quality = quality - 1
                 }
             }
         }
