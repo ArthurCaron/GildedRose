@@ -8,55 +8,173 @@ const val OTHER = "Other"
 class GildedRose(var items: Array<Item>) {
     fun updateQuality() {
         for (i in items.indices) {
-            if (items[i].name != AGED_BRIE && items[i].name != BACKSTAGE) {
-                if (items[i].quality > 0) {
-                    if (items[i].name != SULFURAS) {
-                        items[i].quality = items[i].quality - 1
+            when (items[i].name) {
+                AGED_BRIE -> doAgedBrie(items[i])
+                BACKSTAGE -> doBackstage(items[i])
+                SULFURAS -> doSulfuras(items[i])
+                OTHER -> doOther(items[i])
+            }
+        }
+    }
+
+    private fun doAgedBrie(item: Item) {
+        with(item) {
+            if (name != AGED_BRIE && name != BACKSTAGE) {
+                if (quality > 0) {
+                    if (name != SULFURAS) {
+                        quality = quality - 1
                     }
                 }
             } else {
-                if (items[i].quality < 50) {
-                    items[i].quality = items[i].quality + 1
+                if (quality < 50) {
+                    quality = quality + 1
 
-                    if (items[i].name == BACKSTAGE) {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1
+                    if (name == BACKSTAGE) {
+                        if (sellIn < 11) {
+                            if (quality < 50) {
+                                quality = quality + 1
                             }
                         }
 
-                        if (items[i].sellIn < 6) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1
+                        if (sellIn < 6) {
+                            if (quality < 50) {
+                                quality = quality + 1
                             }
                         }
                     }
                 }
             }
 
-            if (items[i].name != SULFURAS) {
-                items[i].sellIn = items[i].sellIn - 1
+            if (name != SULFURAS) {
+                sellIn = sellIn - 1
             }
 
-            if (items[i].sellIn < 0) {
-                if (items[i].name != AGED_BRIE) {
-                    if (items[i].name != BACKSTAGE) {
-                        if (items[i].quality > 0) {
-                            if (items[i].name != SULFURAS) {
-                                items[i].quality = items[i].quality - 1
+            if (sellIn < 0) {
+                if (name != AGED_BRIE) {
+                    if (name != BACKSTAGE) {
+                        if (quality > 0) {
+                            if (name != SULFURAS) {
+                                quality = quality - 1
                             }
                         }
                     } else {
-                        items[i].quality = items[i].quality - items[i].quality
+                        quality = quality - quality
                     }
                 } else {
-                    if (items[i].quality < 50) {
-                        items[i].quality = items[i].quality + 1
+                    if (quality < 50) {
+                        quality = quality + 1
                     }
                 }
             }
         }
     }
 
+    private fun doBackstage(item: Item) {
+        with(item) {
+            if (name != AGED_BRIE && name != BACKSTAGE) {
+                if (quality > 0) {
+                    if (name != SULFURAS) {
+                        quality = quality - 1
+                    }
+                }
+            } else {
+                if (quality < 50) {
+                    quality = quality + 1
+
+                    if (name == BACKSTAGE) {
+                        if (sellIn < 11) {
+                            if (quality < 50) {
+                                quality = quality + 1
+                            }
+                        }
+
+                        if (sellIn < 6) {
+                            if (quality < 50) {
+                                quality = quality + 1
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (name != SULFURAS) {
+                sellIn = sellIn - 1
+            }
+
+            if (sellIn < 0) {
+                if (name != AGED_BRIE) {
+                    if (name != BACKSTAGE) {
+                        if (quality > 0) {
+                            if (name != SULFURAS) {
+                                quality = quality - 1
+                            }
+                        }
+                    } else {
+                        quality = quality - quality
+                    }
+                } else {
+                    if (quality < 50) {
+                        quality = quality + 1
+                    }
+                }
+            }
+        }
+    }
+
+    private fun doSulfuras(item: Item) {
+        // Do nothing
+    }
+
+    private fun doOther(item: Item) {
+        with(item) {
+            if (name != AGED_BRIE && name != BACKSTAGE) {
+                if (quality > 0) {
+                    if (name != SULFURAS) {
+                        quality = quality - 1
+                    }
+                }
+            } else {
+                if (quality < 50) {
+                    quality = quality + 1
+
+                    if (name == BACKSTAGE) {
+                        if (sellIn < 11) {
+                            if (quality < 50) {
+                                quality = quality + 1
+                            }
+                        }
+
+                        if (sellIn < 6) {
+                            if (quality < 50) {
+                                quality = quality + 1
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (name != SULFURAS) {
+                sellIn = sellIn - 1
+            }
+
+            if (sellIn < 0) {
+                if (name != AGED_BRIE) {
+                    if (name != BACKSTAGE) {
+                        if (quality > 0) {
+                            if (name != SULFURAS) {
+                                quality = quality - 1
+                            }
+                        }
+                    } else {
+                        quality = quality - quality
+                    }
+                } else {
+                    if (quality < 50) {
+                        quality = quality + 1
+                    }
+                }
+            }
+        }
+    }
 }
 
