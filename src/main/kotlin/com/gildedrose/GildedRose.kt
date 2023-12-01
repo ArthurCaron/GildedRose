@@ -8,17 +8,19 @@ const val OTHER = "Other"
 class GildedRose(var items: Array<Item>) {
     fun updateQuality() {
         for (i in items.indices) {
-            when (items[i].name) {
-                AGED_BRIE -> doAgedBrie(items[i])
-                BACKSTAGE -> doBackstage(items[i])
-                SULFURAS -> doSulfuras(items[i])
-                OTHER -> doOther(items[i])
+            with(items[i]) {
+                items[i] = when (name) {
+                    AGED_BRIE -> AgedBrie(name, sellIn, quality).oneDayPasses()
+                    BACKSTAGE -> Backstage(name, sellIn, quality).oneDayPasses()
+                    SULFURAS -> Sulfuras(name, sellIn, quality).oneDayPasses()
+                    else -> Other(name, sellIn, quality).oneDayPasses()
+                }
             }
         }
     }
 
-    private fun doAgedBrie(item: Item) {
-        with(item) {
+    class AgedBrie(name: String, sellIn: Int, quality: Int) : Item(name, sellIn, quality) {
+        fun oneDayPasses(): Item {
             if (quality < 50) {
                 quality = quality + 1
             }
@@ -30,11 +32,12 @@ class GildedRose(var items: Array<Item>) {
                     quality = quality + 1
                 }
             }
+            return this
         }
     }
 
-    private fun doBackstage(item: Item) {
-        with(item) {
+    class Backstage(name: String, sellIn: Int, quality: Int) : Item(name, sellIn, quality) {
+        fun oneDayPasses(): Item {
             if (quality < 50) {
                 quality = quality + 1
 
@@ -56,15 +59,16 @@ class GildedRose(var items: Array<Item>) {
             if (sellIn < 0) {
                 quality = quality - quality
             }
+            return this
         }
     }
 
-    private fun doSulfuras(item: Item) {
-        // Do nothing
+    class Sulfuras(name: String, sellIn: Int, quality: Int) : Item(name, sellIn, quality) {
+        fun oneDayPasses() = this
     }
 
-    private fun doOther(item: Item) {
-        with(item) {
+    class Other(name: String, sellIn: Int, quality: Int) : Item(name, sellIn, quality) {
+        fun oneDayPasses(): Item {
             if (quality > 0) {
                 quality = quality - 1
             }
@@ -76,6 +80,7 @@ class GildedRose(var items: Array<Item>) {
                     quality = quality - 1
                 }
             }
+            return this
         }
     }
 }
