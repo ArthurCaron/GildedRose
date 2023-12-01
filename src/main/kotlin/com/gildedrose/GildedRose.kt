@@ -19,33 +19,35 @@ class GildedRose(var items: Array<Item>) {
         }
     }
 
-    class AgedBrie(name: String, sellIn: Int, quality: Int) : Item(name, sellIn, quality) {
-        fun oneDayPasses(): Item {
-            if (quality < 50) {
-                quality++
+    abstract class GeneralItem(val name: String, var sellIn: Int, _quality: Int) {
+        var quality = _quality
+            set(newQuality) {
+                field = if (newQuality > 50) 50 else newQuality
             }
+    }
 
+    class AgedBrie(name: String, sellIn: Int, quality: Int) : GeneralItem(name, sellIn, quality) {
+        fun oneDayPasses(): Item {
+            quality++
             sellIn--
 
-            if (sellIn < 0 && quality < 50) {
+            if (sellIn < 0) {
                 quality++
             }
-            return this
+            return Item(name, sellIn, quality)
         }
     }
 
-    class Backstage(name: String, sellIn: Int, quality: Int) : Item(name, sellIn, quality) {
+    class Backstage(name: String, sellIn: Int, quality: Int) : GeneralItem(name, sellIn, quality) {
         fun oneDayPasses(): Item {
-            if (quality < 50) {
+            quality++
+
+            if (sellIn < 11) {
                 quality++
+            }
 
-                if (quality < 50 && sellIn < 11) {
-                    quality++
-                }
-
-                if (quality < 50 && sellIn < 6) {
-                    quality++
-                }
+            if (sellIn < 6) {
+                quality++
             }
 
             sellIn--
@@ -53,15 +55,15 @@ class GildedRose(var items: Array<Item>) {
             if (sellIn < 0) {
                 quality = 0
             }
-            return this
+            return Item(name, sellIn, quality)
         }
     }
 
-    class Sulfuras(name: String, sellIn: Int, quality: Int) : Item(name, sellIn, quality) {
-        fun oneDayPasses() = this
+    class Sulfuras(name: String, sellIn: Int, quality: Int) : GeneralItem(name, sellIn, quality) {
+        fun oneDayPasses() = Item(name, sellIn, quality)
     }
 
-    class Other(name: String, sellIn: Int, quality: Int) : Item(name, sellIn, quality) {
+    class Other(name: String, sellIn: Int, quality: Int) : GeneralItem(name, sellIn, quality) {
         fun oneDayPasses(): Item {
             if (quality > 0) {
                 quality--
@@ -72,7 +74,7 @@ class GildedRose(var items: Array<Item>) {
             if (sellIn < 0 && quality > 0) {
                 quality--
             }
-            return this
+            return Item(name, sellIn, quality)
         }
     }
 }
