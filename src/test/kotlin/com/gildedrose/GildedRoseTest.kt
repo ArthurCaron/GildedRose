@@ -27,6 +27,8 @@ class GildedRoseTest {
                     Arguments.of(SULFURAS, Initial(0, 55), AfterOneDay(0, 55)),
                     Arguments.of(OTHER, Initial(0, 25), AfterOneDay(-1, 23)),
                     Arguments.of(OTHER, Initial(1, 25), AfterOneDay(0, 24)),
+                    Arguments.of(CONJURED, Initial(0, 25), AfterOneDay(-1, 21)),
+                    Arguments.of(CONJURED, Initial(1, 25), AfterOneDay(0, 23)),
             )
         }
     }

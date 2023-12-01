@@ -3,7 +3,8 @@ package com.gildedrose
 const val AGED_BRIE = "Aged Brie"
 const val BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert"
 const val SULFURAS = "Sulfuras, Hand of Ragnaros"
-const val OTHER = "Other"
+const val CONJURED = "Conjured Mana Cake"
+const val OTHER = "+5 Dexterity Vest"
 
 class GildedRose(var items: Array<Item>) {
     fun updateQuality() {
@@ -13,6 +14,7 @@ class GildedRose(var items: Array<Item>) {
                     AGED_BRIE -> AgedBrie(name, sellIn, quality).oneDayPasses()
                     BACKSTAGE -> Backstage(name, sellIn, quality).oneDayPasses()
                     SULFURAS -> Sulfuras(name, sellIn, quality).oneDayPasses()
+                    CONJURED -> Conjured(name, sellIn, quality).oneDayPasses()
                     else -> GeneralItem(name, sellIn, quality).oneDayPasses()
                 }
             }
@@ -64,6 +66,13 @@ class GildedRose(var items: Array<Item>) {
     class Sulfuras(name: String, sellIn: Int, quality: Int) : GeneralItem(name, sellIn, quality) {
         override fun updateSellIn() {}
         override fun updateQuality() {}
+    }
+
+    class Conjured(name: String, sellIn: Int, quality: Int) : GeneralItem(name, sellIn, quality) {
+        override fun updateQuality() {
+            super.updateQuality()
+            super.updateQuality()
+        }
     }
 }
 
