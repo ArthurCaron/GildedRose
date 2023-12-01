@@ -22,15 +22,13 @@ class GildedRose(var items: Array<Item>) {
     class AgedBrie(name: String, sellIn: Int, quality: Int) : Item(name, sellIn, quality) {
         fun oneDayPasses(): Item {
             if (quality < 50) {
-                quality = quality + 1
+                quality++
             }
 
-            sellIn = sellIn - 1
+            sellIn--
 
-            if (sellIn < 0) {
-                if (quality < 50) {
-                    quality = quality + 1
-                }
+            if (sellIn < 0 && quality < 50) {
+                quality++
             }
             return this
         }
@@ -39,25 +37,21 @@ class GildedRose(var items: Array<Item>) {
     class Backstage(name: String, sellIn: Int, quality: Int) : Item(name, sellIn, quality) {
         fun oneDayPasses(): Item {
             if (quality < 50) {
-                quality = quality + 1
+                quality++
 
-                if (sellIn < 11) {
-                    if (quality < 50) {
-                        quality = quality + 1
-                    }
+                if (quality < 50 && sellIn < 11) {
+                    quality++
                 }
 
-                if (sellIn < 6) {
-                    if (quality < 50) {
-                        quality = quality + 1
-                    }
+                if (quality < 50 && sellIn < 6) {
+                    quality++
                 }
             }
 
-            sellIn = sellIn - 1
+            sellIn--
 
             if (sellIn < 0) {
-                quality = quality - quality
+                quality = 0
             }
             return this
         }
@@ -70,15 +64,13 @@ class GildedRose(var items: Array<Item>) {
     class Other(name: String, sellIn: Int, quality: Int) : Item(name, sellIn, quality) {
         fun oneDayPasses(): Item {
             if (quality > 0) {
-                quality = quality - 1
+                quality--
             }
 
-            sellIn = sellIn - 1
+            sellIn--
 
-            if (sellIn < 0) {
-                if (quality > 0) {
-                    quality = quality - 1
-                }
+            if (sellIn < 0 && quality > 0) {
+                quality--
             }
             return this
         }
